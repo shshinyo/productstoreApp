@@ -1,0 +1,46 @@
+<div class="card">
+  <div class="card-header">
+    {{pageTitle}}
+  </div>
+
+  <div class="card-body"
+       *ngIf="product">
+       <div class="wizard">
+         <a [routerLink]="['info']" routerLinkActive="active">
+           Basic Information <span [ngClass]="{'fa fa-exclamation':!isValid('info')}"></span></a>
+         <a  [routerLink]="['tages']" routerLinkActive="active">
+           Search Tages <span [ngClass]="{'fa fa-exclamation':!isValid('tages')}"></span></a>
+        </div>
+    <router-outlet></router-outlet>
+    <div class=" row mb-2">
+      <div class="col-md-4">
+        <button class="btn btn-primary mr-3"
+                style="width:80px"
+                type="button"
+                [disabled]="!isValid()"
+                title="save your entered data"
+                (click)="saveProduct()">
+          Save
+        </button>
+        <button class="btn btn-outline-secondary mr-3" [routerLink]="['/products']"
+                style="width:80px"
+                type="button"
+
+                title="Cancel your edits">
+          Cancel
+        </button>
+        <button class="btn btn-outline-warning"
+                style="width:80px"
+                type="button"
+                title="Delete this product"
+                (click)="deleteProduct()">
+          Delete
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="alert alert-danger"
+     *ngIf="errorMessage">{{errorMessage}}
+</div>
